@@ -29,7 +29,7 @@ public class GAgent : MonoBehaviour
     public GAction currentAction;
     private SubGoal currentGoal;
 
-    private void Start()
+    public void Start()
     {
         GAction[] acts = GetComponents<GAction>();
         foreach (GAction a in acts)
@@ -38,8 +38,73 @@ public class GAgent : MonoBehaviour
         }
     }
 
+    bool invoked = false;
+    void CompleteAction()
+    {
+        currentAction.running = false;
+        currentAction.PostPerform();
+        invoked = false;
+    }
     private void LateUpdate()
     {
-        
+        if(currentAction != null && currentAction.running)
+        {
+            float distanceToTarget = Vector3.Distance(currentAction.Target.transform.position, transform.position);
+            if(currentAction.Agent.hasPath && distanceToTarget < 2f)
+            {
+                if (!invoked)
+                {
+                    Invoke("CompleteAction", currentAction.Duration);
+                    invoked = true;
+                }
+            
+            }
+            return;
+        }
+
+        if(planner == null || actionQueue == null)
+        {
+            planner = new GPlanner();
+
+            var sortedGoals = from entry in Goals orderby entry.Value descending select entry;
+       
+            foreach(KeyValuePair<SubGoal, int> sg in sortedGoals){
+                actionQueue = planner.Plan(Actions, sg.Key.Sgoals, null);
+                if(actionQueue != null)
+                {
+                    currentGoal = sg.Key;
+                    break;
+                }
+            }
+        }
+
+        if(actionQueue != null && actionQueue.Count == 0)
+        {
+            if (currentGoal.Remove)
+            {
+                Goals.Remove(currentGoal);
+            }
+            planner = null;
+        }
+
+        if(actionQueue != null && actionQueue.Count > 0)
+        {
+            currentAction = actionQueue.Dequeue();
+            if (currentAction.PrePerform())
+            {
+                if(currentAction.Target == null && currentAction.TargetTag != "")
+                        currentAction.Target = GameObject.FindWithTag(currentAction.TargetTag);
+            
+                if(currentAction.Target != null)
+                {
+                    currentAction.running = true;
+                    currentAction.Agent.SetDestination(currentAction.Target.transform.position);
+                }
+            }
+            else
+            {
+                actionQueue = null;
+            }
+        }
     }
 }
