@@ -607,16 +607,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb625e9969f8584ea3b7e9cd4870405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionName: GoToHospital
+  actionName: Go To Hospital
   Cost: 0
-  Target: {fileID: 0}
-  TargetTag: Door
-  Duration: 2
-  PreConditions: []
-  AfterEffects:
-  - Key: hasArrived
-    Value: 1
-  Agent: {fileID: 0}
+  target: {fileID: 0}
+  targetTag: Door
+  duration: 2
+  preConditions: []
+  afterEffects:
+  - key: hasArrived
+    value: 1
+  agent: {fileID: 0}
   running: 0
 --- !u!114 &504541367
 MonoBehaviour:
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72df65f07ae93294fb2b2dda2f0571e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Actions: []
+  actions: []
   currentAction: {fileID: 0}
 --- !u!195 &504541368
 NavMeshAgent:
@@ -666,18 +666,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762fe6cac08f1ec428840236f4c27291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionName: GoToWaitingRoom
+  actionName: Go To Waiting Room
   Cost: 1
-  Target: {fileID: 0}
-  TargetTag: WaitingArea
-  Duration: 0
-  PreConditions:
-  - Key: hasArrived
-    Value: 0
-  AfterEffects:
-  - Key: isWaiting
-    Value: 0
-  Agent: {fileID: 0}
+  target: {fileID: 0}
+  targetTag: WaitingArea
+  duration: 2
+  preConditions:
+  - key: hasArrived
+    value: 0
+  afterEffects:
+  - key: isWaiting
+    value: 0
+  agent: {fileID: 0}
   running: 0
 --- !u!1 &658721723
 GameObject:

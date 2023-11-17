@@ -6,56 +6,56 @@ using UnityEngine;
 [System.Serializable]
 public class WorldState
 {
-    public string Key;
-    public int Value;
+    public string key;
+    public int value;
 
 }
 
 public class WorldStates
 {
-   public Dictionary<string, int> States;
+   public Dictionary<string, int> states;
 
     public WorldStates()
     {
-        States = new Dictionary<string, int>();
+        states = new Dictionary<string, int>();
     }
 
-    public bool HasState(string Key)
+    public bool HasState(string key)
     {
-        return States.ContainsKey(Key);
+        return states.ContainsKey(key);
 
     }
 
-    private void AddState(string Key, int Value)
+    private void AddState(string key, int value)
     {
-        States.Add(Key, Value);
+        states.Add(key, value);
     }
 
-    public void ModifyState(string Key, int Value)
+    public void ModifyState(string key, int value)
     {
-        if(States.ContainsKey(Key))
+        if(states.ContainsKey(key))
         {
-            States[Key] += Value;
-            if (States[Key] <= 0) RemoveState(Key);
+            states[key] += value;
+            if (states[key] <= 0) RemoveState(key);
         }
-        else States.Add(Key, Value);
+        else states.Add(key, value);
     }
 
-    public void RemoveState(string Key)
+    public void RemoveState(string key)
     {
-       if(States.ContainsKey(Key)) States.Remove(Key);
+       if(states.ContainsKey(key)) states.Remove(key);
     }
 
-    public void SetState(string Key, int Value)
+    public void SetState(string key, int value)
     {
-        if (States.ContainsKey(Key)) States[Key] = Value;
-        else States.Add(Key, Value);
+        if (states.ContainsKey(key)) states[key] = value;
+        else states.Add(key, value);
 
     }
 
     public Dictionary<string, int> GetStates()
     {
-        return States;
+        return states;
     }
 
 }

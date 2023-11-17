@@ -6,22 +6,22 @@ using UnityEditor.Search;
 
 public class SubGoal
 {
-    public Dictionary<string, int> Sgoals;
-    public bool Remove;
+    public Dictionary<string, int> sgoals;
+    public bool remove;
 
 
     public SubGoal(string s, int i, bool r)
     {
-        Sgoals = new Dictionary<string, int>();
-        Sgoals.Add(s, i);
-        Remove = r;
+        sgoals = new Dictionary<string, int>();
+        sgoals.Add(s, i);
+        remove = r;
     } 
 
 }
 public class GAgent : MonoBehaviour
 {
-    public List<GAction> Actions = new List<GAction>();
-    public Dictionary<SubGoal, int> Goals = new Dictionary<SubGoal, int>();
+    public List<GAction> actions = new List<GAction>();
+    public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
 
     private GPlanner planner;
     private Queue<GAction> actionQueue;
@@ -34,7 +34,7 @@ public class GAgent : MonoBehaviour
         GAction[] acts = GetComponents<GAction>();
         foreach (GAction a in acts)
         {
-            Actions.Add(a);
+            actions.Add(a);
         }
     }
 
@@ -49,12 +49,12 @@ public class GAgent : MonoBehaviour
     {
         if(currentAction != null && currentAction.running)
         {
-            float distanceToTarget = Vector3.Distance(currentAction.Target.transform.position, transform.position);
-            if(currentAction.Agent.hasPath && distanceToTarget < 2f)
+            float distanceToTarget = Vector3.Distance(currentAction.target.transform.position, transform.position);
+            if(currentAction.agent.hasPath && distanceToTarget < 2f)
             {
                 if (!invoked)
                 {
-                    Invoke("CompleteAction", currentAction.Duration);
+                    Invoke("CompleteAction", currentAction.duration);
                     invoked = true;
                 }
             
@@ -66,10 +66,10 @@ public class GAgent : MonoBehaviour
         {
             planner = new GPlanner();
 
-            var sortedGoals = from entry in Goals orderby entry.Value descending select entry;
+            var sortedGoals = from entry in goals orderby entry.Value descending select entry;
        
             foreach(KeyValuePair<SubGoal, int> sg in sortedGoals){
-                actionQueue = planner.Plan(Actions, sg.Key.Sgoals, null);
+                actionQueue = planner.Plan(actions, sg.Key.sgoals, null);
                 if(actionQueue != null)
                 {
                     currentGoal = sg.Key;
@@ -80,9 +80,9 @@ public class GAgent : MonoBehaviour
 
         if(actionQueue != null && actionQueue.Count == 0)
         {
-            if (currentGoal.Remove)
+            if (currentGoal.remove)
             {
-                Goals.Remove(currentGoal);
+                goals.Remove(currentGoal);
             }
             planner = null;
         }
@@ -92,13 +92,13 @@ public class GAgent : MonoBehaviour
             currentAction = actionQueue.Dequeue();
             if (currentAction.PrePerform())
             {
-                if(currentAction.Target == null && currentAction.TargetTag != "")
-                        currentAction.Target = GameObject.FindWithTag(currentAction.TargetTag);
+                if(currentAction.target == null && currentAction.targetTag != "")
+                        currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
             
-                if(currentAction.Target != null)
+                if(currentAction.target != null)
                 {
                     currentAction.running = true;
-                    currentAction.Agent.SetDestination(currentAction.Target.transform.position);
+                    currentAction.agent.SetDestination(currentAction.target.transform.position);
                 }
             }
             else

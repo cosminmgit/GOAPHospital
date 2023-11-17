@@ -8,6 +8,6 @@ public class Patient : GAgent
     {
         base.Start();
         SubGoal s1 = new SubGoal("isWaiting", 1, true);
-        Goals.Add(s1, 3);
+        goals.Add(s1, 3);
     }
 }
