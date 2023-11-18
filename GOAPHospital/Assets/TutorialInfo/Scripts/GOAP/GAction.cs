@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public abstract class GAction : MonoBehaviour
 {
@@ -18,7 +17,9 @@ public abstract class GAction : MonoBehaviour
     public Dictionary<string, int> preconditions;
     public Dictionary<string, int> effects;
 
-    public WorldStates agentBeliefs;
+    public WorldStates beliefs;
+
+    public GInventory inventory;
 
     public bool running = false;
 
@@ -26,11 +27,12 @@ public abstract class GAction : MonoBehaviour
     {
         preconditions = new Dictionary<string, int>();
         effects = new Dictionary<string, int>();
+
     }
 
     public void Awake()
     {
-            agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
 
         if(preConditions != null)
         {
@@ -47,6 +49,9 @@ public abstract class GAction : MonoBehaviour
                 effects.Add(w.key, w.value);
             }
         }
+
+        inventory = GetComponent<GAgent>().inventory;
+        beliefs = GetComponent<GAgent>().beliefs;
     }
 
     public bool IsAchievable()
