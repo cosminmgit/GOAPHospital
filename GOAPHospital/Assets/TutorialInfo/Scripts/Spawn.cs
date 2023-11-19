@@ -16,12 +16,13 @@ public class Spawn : MonoBehaviour
         }
 
      //   Invoke("SpawnPatient", 5f);
-        InvokeRepeating("SpawnPatient", 5f, 3f);
+        Invoke("SpawnPatient", 5f);
     }
 
     private void SpawnPatient()
     {
         Instantiate(patienPrefab, transform.position, transform.rotation);
+        Invoke("SpawnPatient",5f);
     }
 
 }

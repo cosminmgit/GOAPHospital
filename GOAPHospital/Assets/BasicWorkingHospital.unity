@@ -1302,54 +1302,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b134b1c5bdecf14e936ab0619fcf833, type: 3}
---- !u!114 &861394114 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5872596239315459778, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-    type: 3}
-  m_PrefabInstance: {fileID: 3995572081403344728}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9493d86cb359a704a8844dfe62de3abe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &861394115 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 827513380517708866, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-    type: 3}
-  m_PrefabInstance: {fileID: 3995572081403344728}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 762fe6cac08f1ec428840236f4c27291, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &861394116 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2329923512632028103, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-    type: 3}
-  m_PrefabInstance: {fileID: 3995572081403344728}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 102008ca0de686943a4aff1b183c5086, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &861394117 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7371895793967758986, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-    type: 3}
-  m_PrefabInstance: {fileID: 3995572081403344728}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4eb625e9969f8584ea3b7e9cd4870405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &871944019
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,7 +2661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1350305430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2724,7 +2676,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patienPrefab: {fileID: 445909138756914572, guid: 1dbabd61f921e5e4aa8de48b2004c581,
     type: 3}
-  numberOfPatients: 2
+  numberOfPatients: 1
+  interval: 0
 --- !u!4 &1350305431
 Transform:
   m_ObjectHideFlags: 0
@@ -4492,6 +4445,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1748808039}
+    - targetCorrespondingSourceObject: {fileID: 2618188073631541129, guid: 51e437be22296b340954bf6591a60065,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1748808043}
+    - targetCorrespondingSourceObject: {fileID: 2618188073631541129, guid: 51e437be22296b340954bf6591a60065,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1748808041}
   m_SourcePrefab: {fileID: 100100000, guid: 51e437be22296b340954bf6591a60065, type: 3}
 --- !u!1 &1748808034 stripped
 GameObject:
@@ -4584,6 +4545,44 @@ MonoBehaviour:
     value: 0
   afterEffects:
   - key: treatPatient
+    value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &1748808041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748808034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88925cd5bd622944886e94e277b400cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisAgent: {fileID: 1748808036}
+--- !u!114 &1748808043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748808034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b86204e5c195b934ea3e6910e7520e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Rest
+  Cost: 1
+  target: {fileID: 0}
+  targetTag: Lounge
+  duration: 5
+  preConditions:
+  - key: exhausted
+    value: 0
+  afterEffects:
+  - key: rested
     value: 0
   agent: {fileID: 0}
   running: 0
@@ -5131,61 +5130,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patient
       objectReference: {fileID: 0}
-    - target: {fileID: 445909138756914572, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 827513380517708866, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: duration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2667731415162427474, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2667731415162427474, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: actions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2667731415162427474, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: actions.Array.data[0]
-      value: 
-      objectReference: {fileID: 861394117}
-    - target: {fileID: 2667731415162427474, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: actions.Array.data[1]
-      value: 
-      objectReference: {fileID: 861394116}
-    - target: {fileID: 2667731415162427474, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: actions.Array.data[2]
-      value: 
-      objectReference: {fileID: 861394115}
-    - target: {fileID: 2667731415162427474, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: actions.Array.data[3]
-      value: 
-      objectReference: {fileID: 861394114}
-    - target: {fileID: 4408965307860264724, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5872596239315459778, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: preConditions.Array.data[0].key
-      value: atHospital
-      objectReference: {fileID: 0}
-    - target: {fileID: 5872596239315459778, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: afterEffects.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7355887951979155443, guid: 1dbabd61f921e5e4aa8de48b2004c581,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5235,11 +5179,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7371895793967758986, guid: 1dbabd61f921e5e4aa8de48b2004c581,
-        type: 3}
-      propertyPath: Cost
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
